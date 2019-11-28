@@ -1,58 +1,66 @@
 package main
 
-import "os"
+import "fmt"
 
-type IFile interface {
-	Read(buf []byte) (n int, err error)
-	Write(buf []byte) (n int, err error)
-	Seek(off int64, whence int) (pos int64, err error)
-	Close() error
+type Usb interface {
+	Start()
+	Stop()
 }
 
-type IReader interface {
-	Read(buf []byte) (n int, err error)
-}
-type IWriter interface {
-	Write(buf []byte) (n int, err error)
+type MP3 interface {
+	PlayMusic()
 }
 
-type ICloser interface {
-	Close() error
+type Phone struct {
 }
 
-//尽管File类并没有从这些接口继承，甚至可以不知道这些接口的存在，但是File类实现了这些接口，可以进行赋值
-
-//----- 接口赋值-----
-
-type LessAdder interface {
-	Less(b Integer) bool
-	Add(b Integer)
+//手机实现了USB接口 和MP3接口
+func (p Phone) Start() {
+	fmt.Println("USB 接入手机")
+}
+func (p Phone) Stop() {
+	fmt.Println("USB 拔出手机")
+}
+func (p Phone) PlayMusic() {
+	fmt.Println("手机播放MPS")
 }
 
-type Lesser interface {
-	Less(b Integer) bool
+type Camera struct {
 }
 
-type Integer int
-
-func (a Integer) Less(b Integer) bool {
-	return a < b
+func (c Camera) Start() {
+	fmt.Println("USB 插入相机")
 }
-func (a *Integer) Add(b Integer) {
-	*a += b
+func (c Camera) Stop() {
+	fmt.Println("USB 拔出相机")
 }
 
-//2.将一个接口赋值给另一个接口
+type Compture struct {
+}
+
+func (compture Compture) Use(u Usb) {
+	u.Start()
+}
+func (compture Compture) Out(u Usb) {
+	u.Stop()
+}
+
+func (compture Compture) PlayMusic(play MP3) {
+	play.PlayMusic()
+}
 
 func main() {
 
-	//var ifile IFile= new(os.File)
-	//
-	//var a Integer = 1
-	////1.将对象实例赋值给接口
-	//var b LessAdder = &a
-	//
-	//var b1 Lesser = &a
-	//var b2 Lesser = a
+	phone := new(Phone)
+	camera := new(Camera)
+
+	var compture Compture
+	//Usb接口可以接收实现类的实例
+	compture.Use(phone)
+	compture.Use(camera)
+	compture.Out(phone)
+	compture.Out(camera)
+
+	compture.PlayMusic(phone) //不太恰当
 
 }
