@@ -1,0 +1,17 @@
+
+Go语言内置基础类型
+    布尔       bool
+    整形       int8,byte,in16,int,uint,uintptr
+    浮点类型    float32,float64
+    复数类型    complex64,complex128
+    字符串      string
+    字符类型    rune
+    错误(异常)  error
+
+复合类型
+    指针      pointer
+    数组      array
+    切片      slice
+    字典      map
+    结构体    struct
+    接口      interface
