@@ -1,5 +1,7 @@
 package main
 
+import "os"
+
 type IFile interface {
 	Read(buf []byte) (n int, err error)
 	Write(buf []byte) (n int, err error)
@@ -43,11 +45,14 @@ func (a *Integer) Add(b Integer) {
 //2.将一个接口赋值给另一个接口
 
 func main() {
-	var a Integer = 1
-	//1.将对象实例赋值给接口
-	var b LessAdder = &a
 
-	var b1 Lesser = &a
-	var b2 Lesser = a
+	//var ifile IFile= new(os.File)
+	//
+	//var a Integer = 1
+	////1.将对象实例赋值给接口
+	//var b LessAdder = &a
+	//
+	//var b1 Lesser = &a
+	//var b2 Lesser = a
 
 }
