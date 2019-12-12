@@ -45,7 +45,7 @@ func main() {
 		syncChan2 <- struct{}{}
 	}()
 
-	//发送和接收程序能完全执行syncChan2中会有两个值，在两次成功接收完成之前，会阻塞在这里
+	//发送和接收程序能完全执行syncChan2中会有两个值，在两次成功接收完成之前，会阻塞在h这里
 	<-syncChan2
 	<-syncChan2
 }
