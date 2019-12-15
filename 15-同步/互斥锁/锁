@@ -1,0 +1,14 @@
+互斥锁
+    互斥锁是传统并发程序对共享资源进行访问控制的主要手段 由sync中的Mutex表示
+
+    var mutex sync.Mutex
+
+    func write(){
+        mutex.Lock()
+        defer mutex.Unlock()  //使用defer语句保证该互斥锁的及时解锁
+    }
+
+    锁定和解锁操作应该成对出现。如果锁定了一个已锁定的互斥锁，那么进行重复锁定操作的goroutine将被阻塞，直到该互斥锁回到解锁状态
+
+
+读写锁
